@@ -21,7 +21,7 @@ public partial class Event
 
     public decimal Price { get; set; }
 
-    public byte[] ImageUrl { get; set; } = null!;
+    public string ImageUrl { get; set; } = null!;
 
     public decimal Rating { get; set; }
 
