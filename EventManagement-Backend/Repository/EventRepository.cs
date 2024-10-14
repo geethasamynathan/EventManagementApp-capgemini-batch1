@@ -3,7 +3,7 @@
 
 //namespace EventManagement_Backend.Repository
 //{
-//    public class EventRepository :IEventRepository
+//    public class EventRepository : IEventRepository
 //    {
 //        private readonly EventManagementDbContext _context;
 
@@ -59,7 +59,7 @@
 //                    item.StartDate = updatedeventEntity.StartDate;
 //                    item.EndDate = updatedeventEntity.EndDate;
 //                    item.Category = updatedeventEntity.Category;
-//                    item.ImageURL = updatedeventEntity.ImageURL;
+//                    item.ImageUrl  = updatedeventEntity.ImageUrl;
 //                    _context.SaveChanges();
 //                    return "updated successfully";
 //                }
