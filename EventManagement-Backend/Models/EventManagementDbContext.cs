@@ -136,7 +136,9 @@ public partial class EventManagementDbContext : DbContext
             entity.Property(e => e.Description).IsUnicode(false);
             entity.Property(e => e.EndDate).HasColumnType("datetime");
             entity.Property(e => e.EventName).IsUnicode(false);
-            entity.Property(e => e.ImageUrl).HasColumnName("ImageURL");
+            entity.Property(e => e.ImageUrl)
+                .IsUnicode(false)
+                .HasColumnName("ImageURL");
             entity.Property(e => e.Location).IsUnicode(false);
             entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
             entity.Property(e => e.Rating).HasColumnType("decimal(2, 1)");
