@@ -17,6 +17,12 @@ public partial class Payment
 
     public string PaymentStatus { get; set; } = null!;
 
+    public int Cvv { get; set; }
+
+    public long CardNumber { get; set; }
+
+    public DateOnly ExpiryDate { get; set; }
+
     public virtual Event Event { get; set; } = null!;
 
     public virtual AspNetUser User { get; set; } = null!;
