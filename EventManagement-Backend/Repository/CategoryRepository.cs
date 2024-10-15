@@ -11,13 +11,19 @@ namespace EventManagement_Backend.Repository
         {
             _context = context;
         }
-        public void AddCategory(Category category)
+        public string AddCategory(Category category)
         {
             if (category != null)
             {
                 _context.Categories.Add(category);
                 _context.SaveChanges();
+                return "Category Added Successfully";
             }
+            else
+            {
+                return "Error Adding Category";
+            }
+            
         }
 
         public List<Category> GetCategories()
@@ -30,23 +36,33 @@ namespace EventManagement_Backend.Repository
             return _context.Categories.FirstOrDefault(c => c.CategoryId == id);
         }
 
-        public void RemoveCategory(int id)
+        public string RemoveCategory(int id)
         {
             var category = _context.Categories.FirstOrDefault(c => c.CategoryId == id);
             if (category != null)
             {
                 _context.Categories.Remove(category);
                 _context.SaveChanges();
+                return "Category Removed Successfully";
+            }
+            else
+            {
+                return "Error Category Removing";
             }
         }
 
-        public void UpdateCategory(Category category)
+        public string UpdateCategory(Category category)
         {
             var existingCategory = _context.Categories.FirstOrDefault(c => c.CategoryId == category.CategoryId);
             if (existingCategory != null)
             {
                 existingCategory.CategoryName = category.CategoryName;
                 _context.SaveChanges();
+                return "Updated SuucessFully";
+            }
+            else
+            {
+                return "Error Updating Category";
             }
         }
     }
