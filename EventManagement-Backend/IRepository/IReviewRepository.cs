@@ -2,7 +2,7 @@
 
 namespace EventManagement_Backend.IRepository
 {
-    public interface IReview
+    public interface IReviewRepository
     {
         string AddReview(Review review);
         string DeleteReview(int reviewId);
