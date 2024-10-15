@@ -13,5 +13,5 @@ public partial class Seat
 
     public bool IsAvailble { get; set; }
 
-    public virtual Event Event { get; set; } = null!;
+    public virtual Event? Event { get; set; } = null!;
 }
