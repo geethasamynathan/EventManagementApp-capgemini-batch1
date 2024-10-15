@@ -9,10 +9,10 @@ namespace EventManagement_Backend.Controllers
     [ApiController]
     public class ReviewsController : ControllerBase
     {
-        private readonly IReview _review;
+        private readonly IReviewRepository _review;
         //private readonly ReviewDbContext _reviewDbContext;
 
-        public ReviewsController(IReview review)
+        public ReviewsController(IReviewRepository review)
         {
             _review = review;
             //_reviewDbContext = reviewDbContext;

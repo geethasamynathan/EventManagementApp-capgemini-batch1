@@ -26,17 +26,27 @@ namespace Event_Management_Application_Authenication
              {
             options.JsonSerializerOptions.AllowTrailingCommas = true;
              });
+
+
+            builder.Services.AddControllers();
+            
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddHttpClient();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<ApplicationDbContext>(opts => opts.UseSqlServer(builder.Configuration.GetConnectionString("eventconnection")));
+
             builder.Services.AddDbContext<EventManagementDbContext>(opts => opts.UseSqlServer(builder.Configuration.GetConnectionString("eventconnection")));
-            builder.Services.AddScoped<IReview,EventReview>();
+            builder.Services.AddScoped<IReviewRepository,ReviewRepository>();
             builder.Services.AddScoped<IEventRepository, EventRepository>();
             builder.Services.AddScoped<ICaterogryRepository, CategoryRepository>();
             builder.Services.AddScoped<ITicketRepository, TicketRepository>();
             builder.Services.AddHttpClient();
+
+            
+            //builder.Services.AddScoped<IReview,EventReview>();
+
             // For Identity
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
             // Adding Authentication
