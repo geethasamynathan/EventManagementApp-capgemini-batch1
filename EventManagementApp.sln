@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventManagement-FrontEnd-Se
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventManagement-Backend-Service-TestProject", "EventManagement-Backend-Service-TestProject\EventManagement-Backend-Service-TestProject.csproj", "{7617E2AD-435E-4481-85A4-3AEB63F82FE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventManagement-Backend", "EventManagement-Backend\EventManagement-Backend.csproj", "{22BE9A63-8372-4FAF-A7A3-96BC6A770A95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventManagement-Backend", "EventManagement-Backend\EventManagement-Backend.csproj", "{22BE9A63-8372-4FAF-A7A3-96BC6A770A95}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventManagement-Frontend", "EventManagement-Frontend\EventManagement-Frontend.csproj", "{72B4B9BC-0940-4573-9838-7EB027A45AED}"
 EndProject
