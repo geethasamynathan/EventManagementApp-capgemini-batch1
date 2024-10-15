@@ -32,9 +32,10 @@ namespace Event_Management_Application_Authenication
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<ApplicationDbContext>(opts => opts.UseSqlServer(builder.Configuration.GetConnectionString("eventconnection")));
             builder.Services.AddDbContext<EventManagementDbContext>(opts => opts.UseSqlServer(builder.Configuration.GetConnectionString("eventconnection")));
-
+            builder.Services.AddScoped<IReview,EventReview>();
             builder.Services.AddScoped<IEventRepository, EventRepository>();
             builder.Services.AddScoped<ICaterogryRepository, CategoryRepository>();
+            builder.Services.AddScoped<ITicketRepository, TicketRepository>();
             builder.Services.AddHttpClient();
             // For Identity
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
