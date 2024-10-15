@@ -1,8 +1,8 @@
 
 using EventManagement_Backend.Authentication;
-//using EventManagement_Backend.IRepository;
-//using EventManagement_Backend.Models;
-//using EventManagement_Backend.Repository;
+using EventManagement_Backend.IRepository;
+using EventManagement_Backend.Models;
+using EventManagement_Backend.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -30,9 +30,10 @@ namespace Event_Management_Application_Authenication
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<ApplicationDbContext>(opts => opts.UseSqlServer(builder.Configuration.GetConnectionString("eventconnection")));
-            //builder.Services.AddDbContext<EventManagementDbContext>(opts => opts.UseSqlServer(builder.Configuration.GetConnectionString("eventconnection")));
+            builder.Services.AddDbContext<EventManagementDbContext>(opts => opts.UseSqlServer(builder.Configuration.GetConnectionString("eventconnection")));
 
-            //builder.Services.AddScoped<IEventRepository,EventRepository>();
+            builder.Services.AddScoped<IEventRepository, EventRepository>();
+            builder.Services.AddScoped<ICaterogryRepository, CategoryRepository>();
             builder.Services.AddHttpClient();
             // For Identity
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
@@ -84,7 +85,15 @@ namespace Event_Management_Application_Authenication
         }
     });
             });
-
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", policy =>
+                {
+                    policy.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader();
+                });
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

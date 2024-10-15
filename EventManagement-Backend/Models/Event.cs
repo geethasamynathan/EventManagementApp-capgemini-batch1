@@ -7,7 +7,7 @@ public partial class Event
 {
     public int EventId { get; set; }
 
-    public int CategoryId { get; set; }
+    public int? CategoryId { get; set; }
 
     public string EventName { get; set; } = null!;
 
@@ -29,13 +29,13 @@ public partial class Event
 
     public int AvailableTickets { get; set; }
 
-    public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+    public virtual ICollection<Booking>? Bookings { get; set; } = new List<Booking>();
 
-    public virtual Category Category { get; set; } = null!;
+    public virtual Category? Category { get; set; } = null!;
 
-    public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
+    public virtual ICollection<Payment>? Payments { get; set; } = new List<Payment>();
 
-    public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
+    public virtual ICollection<Review>? Reviews { get; set; } = new List<Review>();
 
-    public virtual ICollection<Seat> Seats { get; set; } = new List<Seat>();
+    public virtual ICollection<Seat>? Seats { get; set; } = new List<Seat>();
 }
