@@ -22,11 +22,12 @@ namespace Event_Management_Application_Authenication
 
             //builder.Services.AddControllers();
             builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.AllowTrailingCommas = true;
-    });
+             .AddJsonOptions(options =>
+             {
+            options.JsonSerializerOptions.AllowTrailingCommas = true;
+             });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddHttpClient();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<ApplicationDbContext>(opts => opts.UseSqlServer(builder.Configuration.GetConnectionString("eventconnection")));
