@@ -34,6 +34,7 @@ namespace Event_Management_Application_Authenication
 
             builder.Services.AddScoped<IEventRepository, EventRepository>();
             builder.Services.AddScoped<ICaterogryRepository, CategoryRepository>();
+            builder.Services.AddScoped<ITicketRepository, TicketRepository>();
             builder.Services.AddHttpClient();
             // For Identity
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
