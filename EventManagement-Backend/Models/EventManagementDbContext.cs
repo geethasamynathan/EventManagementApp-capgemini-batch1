@@ -115,24 +115,33 @@ public partial class EventManagementDbContext : DbContext
 
         modelBuilder.Entity<Booking>(entity =>
         {
-            entity.Property(e => e.BookingId).ValueGeneratedNever();
+            entity.HasKey(e => e.BookingId).HasName("PK__Bookings__73951AED9D8EF0BE");
+
             entity.Property(e => e.BookingDate).HasColumnType("datetime");
             entity.Property(e => e.UserId).HasMaxLength(450);
 
             entity.HasOne(d => d.Event).WithMany(p => p.Bookings)
                 .HasForeignKey(d => d.EventId)
-                .HasConstraintName("FK_Bookings_Events1");
+                .HasConstraintName("FK_Bookings_Event");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Bookings)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK_Bookings_AspNetUsers");
         });
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.Property(e => e.CategoryId).ValueGeneratedNever();
+            entity.HasKey(e => e.CategoryId).HasName("PK__Categori__19093A0B61A3498F");
+
             entity.Property(e => e.CategoryName).IsUnicode(false);
         });
 
         modelBuilder.Entity<Event>(entity =>
         {
-            entity.Property(e => e.EventId).ValueGeneratedNever();
+            entity.HasKey(e => e.EventId).HasName("PK__Event__7944C8100E7DE200");
+
+            entity.ToTable("Event");
+
             entity.Property(e => e.Description).IsUnicode(false);
             entity.Property(e => e.EndDate).HasColumnType("datetime");
             entity.Property(e => e.EventName).IsUnicode(false);
@@ -146,12 +155,14 @@ public partial class EventManagementDbContext : DbContext
 
             entity.HasOne(d => d.Category).WithMany(p => p.Events)
                 .HasForeignKey(d => d.CategoryId)
-                .HasConstraintName("FK_Events_Categories1");
+                .HasConstraintName("FK_Event_Categories");
         });
 
         modelBuilder.Entity<Payment>(entity =>
         {
-            entity.Property(e => e.PaymentId).ValueGeneratedNever();
+            entity.HasKey(e => e.PaymentId).HasName("PK__Payments__9B556A380611D3A4");
+
+            entity.Property(e => e.Cvv).HasColumnName("CVV");
             entity.Property(e => e.PaymentDate).HasColumnType("datetime");
             entity.Property(e => e.PaymentStatus).IsUnicode(false);
             entity.Property(e => e.TotalAmount).HasColumnType("decimal(18, 0)");
@@ -159,7 +170,7 @@ public partial class EventManagementDbContext : DbContext
 
             entity.HasOne(d => d.Event).WithMany(p => p.Payments)
                 .HasForeignKey(d => d.EventId)
-                .HasConstraintName("FK_Payments_Events1");
+                .HasConstraintName("FK_Payments_Event");
 
             entity.HasOne(d => d.User).WithMany(p => p.Payments)
                 .HasForeignKey(d => d.UserId)
@@ -168,7 +179,8 @@ public partial class EventManagementDbContext : DbContext
 
         modelBuilder.Entity<Review>(entity =>
         {
-            entity.Property(e => e.ReviewId).ValueGeneratedNever();
+            entity.HasKey(e => e.ReviewId).HasName("PK__Reviews__74BC79CEDDDABF17");
+
             entity.Property(e => e.Comment).IsUnicode(false);
             entity.Property(e => e.Rating).HasColumnType("decimal(2, 1)");
             entity.Property(e => e.ReviewDate).HasColumnType("datetime");
@@ -176,7 +188,7 @@ public partial class EventManagementDbContext : DbContext
 
             entity.HasOne(d => d.Event).WithMany(p => p.Reviews)
                 .HasForeignKey(d => d.EventId)
-                .HasConstraintName("FK_Reviews_Events");
+                .HasConstraintName("FK_Reviews_Event");
 
             entity.HasOne(d => d.User).WithMany(p => p.Reviews)
                 .HasForeignKey(d => d.UserId)
@@ -185,7 +197,8 @@ public partial class EventManagementDbContext : DbContext
 
         modelBuilder.Entity<Seat>(entity =>
         {
-            entity.Property(e => e.SeatId).ValueGeneratedNever();
+            entity.HasKey(e => e.SeatId).HasName("PK__Seats__311713F3266C06DD");
+
             entity.Property(e => e.SeatNumber)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -193,21 +206,18 @@ public partial class EventManagementDbContext : DbContext
             entity.HasOne(d => d.Event).WithMany(p => p.Seats)
                 .HasForeignKey(d => d.EventId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Seats_Events");
+                .HasConstraintName("FK_Seats_Event");
         });
 
         modelBuilder.Entity<Ticket>(entity =>
         {
-            entity.Property(e => e.TicketId).ValueGeneratedNever();
+            entity.HasKey(e => e.TicketId).HasName("PK__Tickets__712CC607051425FE");
+
             entity.Property(e => e.TotalAmount).HasColumnType("decimal(18, 0)");
 
             entity.HasOne(d => d.Booking).WithMany(p => p.Tickets)
                 .HasForeignKey(d => d.BookingId)
                 .HasConstraintName("FK_Tickets_Bookings");
-
-            entity.HasOne(d => d.Seat).WithMany(p => p.Tickets)
-                .HasForeignKey(d => d.SeatId)
-                .HasConstraintName("FK_Tickets_Seats");
         });
 
         OnModelCreatingPartial(modelBuilder);
