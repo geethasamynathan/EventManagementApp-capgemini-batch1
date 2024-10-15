@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EventManagement_Backend.Repository
 {
-    public class EventReview : IReview
+    public class ReviewRepository : IReviewRepository
     {
         private readonly EventManagementDbContext _Context;
         
-        public EventReview(EventManagementDbContext context)
+        public ReviewRepository(EventManagementDbContext context)
         {
             _Context = context;
           
