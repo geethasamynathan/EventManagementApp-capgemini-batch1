@@ -11,6 +11,11 @@ namespace EventManagement_Backend.Repository
         {
             _context = context;
         }
+        /// <summary>
+        /// Adds a new category to the database.
+        /// </summary>
+        /// <param name="category">The category to be added.</param>
+        /// <returns>A message indicating whether the category was added successfully or not.</returns>
         public string AddCategory(Category category)
         {
             if (category != null)
@@ -25,17 +30,28 @@ namespace EventManagement_Backend.Repository
             }
             
         }
-
+        /// <summary>
+        /// Retrieves a list of all categories from the database.
+        /// </summary>
+        /// <returns>A list of all categories.</returns>
         public List<Category> GetCategories()
         {
             return _context.Categories.ToList();
         }
-
+        /// <summary>
+        /// Retrieves a category by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the category to retrieve.</param>
+        /// <returns>The category that matches the provided ID, or null if not found.</returns>
         public Category GetCategoryById(int id)
         {
             return _context.Categories.FirstOrDefault(c => c.CategoryId == id);
         }
-
+        /// <summary>
+        /// Removes a category from the database by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the category to remove.</param>
+        /// <returns>A message indicating whether the category was removed successfully or not.</returns>
         public string RemoveCategory(int id)
         {
             var category = _context.Categories.FirstOrDefault(c => c.CategoryId == id);
@@ -50,7 +66,11 @@ namespace EventManagement_Backend.Repository
                 return "Error Category Removing";
             }
         }
-
+        /// <summary>
+        /// Updates an existing category's details.
+        /// </summary>
+        /// <param name="category">The category object with updated information.</param>
+        /// <returns>A message indicating whether the category was updated successfully or not.</returns>
         public string UpdateCategory(Category category)
         {
             var existingCategory = _context.Categories.FirstOrDefault(c => c.CategoryId == category.CategoryId);
