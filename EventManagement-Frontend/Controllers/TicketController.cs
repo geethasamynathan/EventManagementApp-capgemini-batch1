@@ -1,83 +1,67 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using EventManagement_Frontend.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace EventManagement_Frontend.Controllers
 {
-    public class TicketController : Microsoft.AspNetCore.Mvc.Controller
+    public class TicketController : Controller
     {
-        // GET: TicketController
-        public ActionResult Index()
+        
+        /// <returns></returns>
+        public IActionResult Create()
         {
-            return View();
+            var availableSeats = GetAvailableSeats();
+            ViewBag.AvailableSeats = availableSeats; // Pass available seats to the view
+            return View(new TicketModel()); // Pass an empty model to the view
         }
 
-        // GET: TicketController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: TicketController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: TicketController/Create
+        // POST: Ticket/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult Create(TicketModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                // For now, let's just simulate a booking ID and total amount calculation
+                model.BookingID = new System.Random().Next(1, 1000); // Simulating a booking ID
+                model.TotalAmount = model.NumberOfTickets * 100; // Assuming a ticket price of $20
+
+                // Store model data in TempData
+                TempData["BookingData"] = JsonConvert.SerializeObject(model);
+
+                // Redirect to the confirmation page
+                return RedirectToAction("Confirmation");
             }
-            catch
-            {
-                return View();
-            }
+
+            // If we got this far, something failed; redisplay the form
+            ViewBag.AvailableSeats = GetAvailableSeats(); // Replace with actual seat retrieval logic
+            return View(model);
         }
 
-        // GET: TicketController/Edit/5
-        public ActionResult Edit(int id)
+        public IActionResult Confirmation()
         {
-            return View();
+            // Retrieve model data from TempData
+            var modelData = TempData["BookingData"] as string;
+
+            if (!string.IsNullOrEmpty(modelData))
+            {
+                var model = JsonConvert.DeserializeObject<TicketModel>(modelData);
+                return View(model); // Pass the model to the view
+            }
+
+            return RedirectToAction("Create"); // Redirect to create if no data is found
         }
 
-        // POST: TicketController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        private List<int> GetAvailableSeats()
         {
-            try
+            // Simulate available seats (e.g., from a database)
+            var availableSeats = new List<int>();
+            for (int i = 1; i <= 40; i++)
             {
-                return RedirectToAction(nameof(Index));
+                availableSeats.Add(i);
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: TicketController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: TicketController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return availableSeats; // Return list of 40 seats
         }
     }
 }

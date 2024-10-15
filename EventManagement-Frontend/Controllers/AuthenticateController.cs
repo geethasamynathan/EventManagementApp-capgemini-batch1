@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EventManagement_Frontend.Controllers
 {
-    public class AuthenticateController : Microsoft.AspNetCore.Mvc.Controller
+    public class AuthenticateController : Controller
     {
             private readonly HttpClient _httpClient;
             private readonly IConfiguration _config;
@@ -60,6 +60,53 @@ namespace EventManagement_Frontend.Controllers
                     }
                 }
             }
-        
+
+        [HttpGet]
+        public IActionResult Registration()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Registration(UserRegisteration userRegisteration)
+        {
+            // Check if the model is valid
+            if (!ModelState.IsValid)
+            {
+                TempData["ErrorMessage"] = "Invalid form data";
+                return View(userRegisteration);  // Return the view with the current model so that data persists
+            }
+
+            // Convert the model to JSON
+            var json = JsonConvert.SerializeObject(userRegisteration);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            try
+            {
+                var response = await _httpClient.PostAsync($"{_config["ApiSettings:AuthURL"]}register", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["SuccessMessage"] = "User Added Successfully";
+                    // Redirect to the Login page after successful registration
+                    return RedirectToAction("Login", "Authenticate");
+                }
+                else
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    TempData["ErrorMessage"] = "Registration failed. Server responded with an error.";
+                    ModelState.AddModelError("", $"Registration failed: {errorContent}");
+                    return View("Registeration");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "An error occurred while processing your request.";
+                ModelState.AddModelError("", ex.Message);
+                return View("Registeration");
+            }
+        }
+
+
     }
 }
