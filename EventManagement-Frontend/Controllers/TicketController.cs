@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 
 namespace EventManagement_Frontend.Controllers
 {
-
     public class TicketController : Controller
     {
         public IActionResult Create()
