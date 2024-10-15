@@ -15,5 +15,5 @@ public partial class Ticket
 
     public decimal TotalAmount { get; set; }
 
-    public virtual Booking Booking { get; set; } = null!;
+    public virtual Booking? Booking { get; set; } = null!;
 }
