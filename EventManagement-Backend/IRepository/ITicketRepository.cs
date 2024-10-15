@@ -11,7 +11,7 @@ namespace EventManagement_Backend.IRepository
         bool CancelTicket(int ticketId);
 
         // Method to view all booked tickets
-        IEnumerable<Ticket> GetBookedTickets(int bookingId);
+        IEnumerable<Ticket> GetBookedTickets(int TicketId);
 
         // Method to get a specific ticket by ticket ID
     }
