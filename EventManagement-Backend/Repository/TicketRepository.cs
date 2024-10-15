@@ -30,9 +30,9 @@ namespace EventManagement_Backend.Repository
             _context.SaveChanges(); 
             return true;
         }
-        public IEnumerable<Ticket> GetBookedTickets(int bookingId)
+        public IEnumerable<Ticket> GetBookedTickets(int TicketId)
         {
-            return _context.Tickets.Where(t => t.BookingId == bookingId).ToList(); 
+            return _context.Tickets.Where(t => t.BookingId == TicketId).ToList(); 
         }
     }
 }
