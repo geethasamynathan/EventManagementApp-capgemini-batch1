@@ -19,23 +19,34 @@ namespace Event_Management_Application_Authenication
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+<<<<<<< Updated upstream
             //builder.Services.AddControllers();
             builder.Services.AddControllers()
              .AddJsonOptions(options =>
              {
             options.JsonSerializerOptions.AllowTrailingCommas = true;
              });
+=======
+
+            builder.Services.AddControllers();
+            
+>>>>>>> Stashed changes
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddHttpClient();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<ApplicationDbContext>(opts => opts.UseSqlServer(builder.Configuration.GetConnectionString("eventconnection")));
+<<<<<<< Updated upstream
             builder.Services.AddDbContext<EventManagementDbContext>(opts => opts.UseSqlServer(builder.Configuration.GetConnectionString("eventconnection")));
-            builder.Services.AddScoped<IReview,EventReview>();
+            builder.Services.AddScoped<IReviewRepository,ReviewRepository>();
             builder.Services.AddScoped<IEventRepository, EventRepository>();
             builder.Services.AddScoped<ICaterogryRepository, CategoryRepository>();
             builder.Services.AddScoped<ITicketRepository, TicketRepository>();
             builder.Services.AddHttpClient();
+=======
+            
+            builder.Services.AddScoped<IReview,EventReview>();
+>>>>>>> Stashed changes
             // For Identity
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
             // Adding Authentication
