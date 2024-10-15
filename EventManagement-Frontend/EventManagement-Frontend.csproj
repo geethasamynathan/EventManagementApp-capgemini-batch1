@@ -22,4 +22,8 @@
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EventManagement-Backend\EventManagement-Backend.csproj" />
+  </ItemGroup>
+
 </Project>
