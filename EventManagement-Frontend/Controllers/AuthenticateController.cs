@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EventManagement_Frontend.Controllers
 {
-    public class AuthenticateController : Microsoft.AspNetCore.Mvc.Controller
+    public class AuthenticateController : Controller
     {
             private readonly HttpClient _httpClient;
             private readonly IConfiguration _config;
