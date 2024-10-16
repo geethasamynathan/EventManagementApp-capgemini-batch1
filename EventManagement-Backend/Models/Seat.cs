@@ -11,7 +11,7 @@ public partial class Seat
 
     public string SeatNumber { get; set; } = null!;
 
-    public bool IsAvailble { get; set; }
+    public bool? IsAvailble { get; set; }
 
     public virtual Event? Event { get; set; } = null!;
 }
