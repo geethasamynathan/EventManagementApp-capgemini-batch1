@@ -5,7 +5,6 @@ namespace EventManagement_Backend.Models;
 
 public partial class Payment
 {
-
     public int PaymentId { get; set; }
 
     public string UserId { get; set; } = null!;
