@@ -1,6 +1,7 @@
 
 using EventManagement_Backend.Authentication;
 using EventManagement_Backend.IRepository;
+using EventManagement_Backend.MappingProfile;
 using EventManagement_Backend.Models;
 using EventManagement_Backend.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -18,6 +19,8 @@ namespace Event_Management_Application_Authenication
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddAutoMapper(typeof(PaymentProfile));
+            builder.Services.AddLogging();
             // Add services to the container.
 
             //builder.Services.AddControllers();
@@ -42,8 +45,8 @@ namespace Event_Management_Application_Authenication
             builder.Services.AddScoped<IEventRepository, EventRepository>();
             builder.Services.AddScoped<ICaterogryRepository, CategoryRepository>();
             builder.Services.AddScoped<ITicketRepository, TicketRepository>();
+            builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
             builder.Services.AddHttpClient();
-
             
             //builder.Services.AddScoped<IReview,EventReview>();
 
