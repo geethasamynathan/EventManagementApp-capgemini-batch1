@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using EventManagement_Frontend.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace EventManagement_Frontend.Controllers
 {
     public class ProfileController : Microsoft.AspNetCore.Mvc.Controller
     {
-        // GET: ProfileController
+        //GET: ProfileController
         public ActionResult Index()
         {
             return View();
@@ -79,5 +81,6 @@ namespace EventManagement_Frontend.Controllers
                 return View();
             }
         }
+
     }
 }
