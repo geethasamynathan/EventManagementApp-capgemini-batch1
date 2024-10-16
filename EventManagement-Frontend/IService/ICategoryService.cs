@@ -1,6 +1,11 @@
-﻿namespace EventManagement_Frontend.IService
+﻿using EventManagement_Frontend.Models;
+
+namespace EventManagement_Frontend.IService
 {
-    public class ICategoryService
+    public interface ICategoryService
     {
+        Task<List<CategoryModel>> GetCategory();
+        Task<bool> DeleteCategory(int categoryId);
+        Task<bool> UpdateCategory(int categoryId, CategoryModel updatedCategory);
     }
 }
