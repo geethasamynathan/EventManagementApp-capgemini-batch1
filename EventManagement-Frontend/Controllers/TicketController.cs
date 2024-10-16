@@ -7,8 +7,6 @@ namespace EventManagement_Frontend.Controllers
 {
     public class TicketController : Controller
     {
-        
-        /// <returns></returns>
         public IActionResult Create()
         {
             var availableSeats = GetAvailableSeats();
