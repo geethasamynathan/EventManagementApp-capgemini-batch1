@@ -14,75 +14,7 @@ namespace EventManagement_Frontend.Controllers
         {
             _context = context;
         }
-        //public IActionResult Index(int eventId = 3)
-        //{
-        //    //var seats = _context.Seats.Where(s => s.EventId == eventId).ToList();
-        //    //var seatModels = seats.Select(seat => new SeatModel
-        //    //{
-        //    //    SeatId = seat.SeatId,
-        //    //    SeatNumber = seat.SeatNumber,
-        //    //    IsAvailble = seat.IsAvailble,
-        //    //    EventId = seat.EventId
-        //    //}).ToList();
-        //    //return View(seatModels);
-        //    var seats = _context.Seats
-        //    .Where(s => s.EventId == eventId)
-        //    .Select(seat => new SeatModel
-        //    {
-        //        SeatId = seat.SeatId,
-        //        SeatNumber = seat.SeatNumber,
-        //        IsAvailble = seat.IsAvailble,
-        //        EventId = seat.EventId
-        //    }).ToList();
-
-        //    return View(seats);
-        //}
-        //// POST: Book multiple seats
-        //[HttpPost]
-        //public  IActionResult BookSeats(int userId, List<int> seatIds)
-        //{
-        //    var seats = _context.Seats.Where(s => seatIds.Contains(s.SeatId)).ToList();
-        //    if (seats == null || !seats.Any())
-        //    {
-        //        return Json(new { success = false, message = "No valid seats found" });
-        //    }
-        //    foreach (var seat in seats)
-        //    {
-        //        bool res = (bool)seat.IsAvailble;
-        //        if (!res) // Only book seats that are not already booked
-        //        {
-        //            return Json(new { success = false, message = "Some seats are already booked" });
-        //        }
-        //    }
-        //    foreach (var seat in seats)
-        //    {
-        //        if (seat.IsAvailble == false) // Only book seats that are not already booked
-        //        {
-        //            seat.IsAvailble = true;
-
-        //            // Create a new booking entry
-        //            //_context.Bookings.Add(new Booking
-        //            //{
-        //            //    UserId = userId,
-        //            //    EventId = seat.EventId,
-        //            //    SeatId = seat.SeatId,
-        //            //    BookingDate = DateTime.Now
-        //            //});
-
-        //            // Mark the seat as modified
-        //            _context.Entry(seat).Property(p => p.IsAvailble).IsModified = true;
-        //        }
-        //        else
-        //        {
-        //            return Json(new { success = false, message = "Some seats are already booked" });
-        //        }
-        //    }
-
-        //    _context.SaveChanges();
-        //    return Json(new { success = true, message = "Seats booked successfully" });
-        //}
-
-
+        
         public IActionResult Index(int eventId = 3)
         {
             var seats = _context.Seats
@@ -125,7 +57,7 @@ namespace EventManagement_Frontend.Controllers
             {
                 seat.IsAvailble = true; // Mark seat as booked (1 = booked)
 
-                // Optionally, create a new booking entry (Uncomment if booking logic is implemented)
+                // Optionally, create a new booking entry
                 //_context.Bookings.Add(new Booking
                 //{
                 //    UserId = userId,
