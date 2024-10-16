@@ -1,0 +1,39 @@
+﻿@model List<EventModel>
+
+<h2>Events</h2>
+
+@if (Model == null || !Model.Any())
+{
+    <p>No events available at the moment.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Event Name</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var eventModel in Model)
+            {
+                <tr>
+                    <td>@eventModel.EventName</td>
+                    <td>@eventModel.StartDate.ToString("yyyy-MM-dd")</td>
+                    <td>@eventModel.Location</td>
+                    <td>@eventModel.Price.ToString("C")</td>
+                    <td>
+                        <a href="@Url.Action("Details", new { id = eventModel.EventId })">Details</a> |
+                        <a href="@Url.Action("EditEvent", new { id = eventModel.EventId })">Edit</a> |
+                        <a href="@Url.Action("DeleteEvent", new { id = eventModel.EventId })">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<a href="@Url.Action("CreateEvent","Event")" class="btn btn-primary">Create New Event</a>
