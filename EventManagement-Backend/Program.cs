@@ -47,7 +47,12 @@ namespace Event_Management_Application_Authenication
             builder.Services.AddScoped<ITicketRepository, TicketRepository>();
             builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
             builder.Services.AddHttpClient();
-            
+            builder.Services.AddAutoMapper(typeof(BookingProfile));
+            builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+            builder.Services.AddScoped<IBookingService, BookingService>();
+            builder.Services.AddControllers().AddNewtonsoftJson();
+            builder.Services.AddLogging();
+
             //builder.Services.AddScoped<IReview,EventReview>();
 
             // For Identity
