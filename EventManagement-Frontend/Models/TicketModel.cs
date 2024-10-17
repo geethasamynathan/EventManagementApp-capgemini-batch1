@@ -7,7 +7,7 @@ namespace EventManagement_Frontend.Models
         [Required(ErrorMessage = "Booking ID is required")]
         public int BookingID { get; set; }
 
-        [Required(ErrorMessage = "Seat number is required")]
+        //[Required(ErrorMessage = "Seat number is required")]
         public int SeatNumber { get; set; }
 
         [Required(ErrorMessage = "Number of ticket is required")]

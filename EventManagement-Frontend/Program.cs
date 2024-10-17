@@ -1,4 +1,6 @@
 using EventManagement_Backend.Models;
+using EventManagement_Frontend.IService;
+using EventManagement_Frontend.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,8 @@ builder.Services.AddDbContext<EventManagementDbContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
+builder.Services.AddHttpClient<IReviewService, ReviewService>();
+builder.Services.AddHttpClient<IBookingService, BookingService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins",
