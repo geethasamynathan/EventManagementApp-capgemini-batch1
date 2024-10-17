@@ -44,7 +44,7 @@ namespace EventManagement_Backend.Repository
             var paymentDto = _mapper.Map<PaymentDTO>(payment);
             return paymentDto;
         }
-        private bool IsValidCard(string cardNumber, string expirationDate, string cvv)
+        public bool IsValidCard(string cardNumber, string expirationDate, string cvv)
         {
             bool isValidCardNumber = cardNumber.Length == 16;
             bool isValidExpirationDate = DateTime.TryParseExact(expirationDate, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var expiryDate) && expiryDate > DateTime.Now;

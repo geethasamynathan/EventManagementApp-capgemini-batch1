@@ -90,7 +90,7 @@ namespace EventManagement_Backend.Repository
             if (eventEntity != null)
             {
                 _context.Events.Remove(eventEntity); // Remove the event from the context
-                _context.SaveChangesAsync(); // Save changes to the database
+                _context.SaveChanges(); // Save changes to the database
                 return "removed successfully";
             }
             else
