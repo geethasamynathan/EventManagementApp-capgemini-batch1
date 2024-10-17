@@ -3,7 +3,8 @@
     <link href="~/css/event.css" rel="stylesheet" />
 </head>
 
-<h2 class="header">Discover Our Events</h2>
+
+<h2 class="header text-center" >Discover Our Events</h2>
 
 @if (Model == null || !Model.Any())
 {
@@ -30,6 +31,6 @@ else
         <br />
     }
 }
- @*  <button>
- <a href="@Url.Action("CreateEvent", "Event")">Create New Event</a>
- </button> *@
+<button>
+    <a href="@Url.Action("CreateEvent", "Event")">Create New Event</a>
+</button>
