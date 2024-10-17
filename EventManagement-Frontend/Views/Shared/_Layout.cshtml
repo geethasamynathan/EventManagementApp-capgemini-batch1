@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="~/EventManagement_Frontend.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
+   @*  <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">EventManagement_Frontend</a>
@@ -29,7 +29,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Seat" asp-action="Index">seat</a>
                         </li>
-                        li class="nav-item">
+                        <li class="nav-item">
                         <a class="nav-link text-white" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
                         </li>
                         <li class="nav-item">
@@ -39,7 +39,7 @@
                 </div>
             </div>
         </nav>
-    </header>
+    </header> *@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -47,8 +47,8 @@
     </div>
 
      <footer class="border-top footer text-muted bg-dark">
-         <div class="container">
-            Team - 2; &copy; 2024 - EventManagement_Frontend - <a asp-area="" asp-controller="Home" asp-action="Privacy">Home</a>
+         <div class="container text-center">
+            Team - 2; &copy; 2024 - EventManagement - <a asp-area="" asp-controller="Home" asp-action="HomePage">Home</a>
          </div>
      </footer>
      <script src="~/lib/jquery/dist/jquery.min.js"></script>

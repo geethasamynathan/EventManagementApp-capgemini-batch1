@@ -1,5 +1,6 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
+    height:100%;
 }
 
 @media (min-width: 768px) {
@@ -18,12 +19,10 @@ html {
 }
 
 body {
-    margin-bottom: 60px;
+    height: 100%;
 }
 
 /*css form registration page*/
-
-
 .card {
     border-radius: 10px;
 }
@@ -47,3 +46,11 @@ body {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
+.nav-item {
+    margin-left: 1000px;
+}
+
+.form-inline {
+    margin-left: 15px;
+}
+
