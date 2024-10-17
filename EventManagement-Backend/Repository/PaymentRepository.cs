@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using EventManagement_Backend.DTOs;
 using EventManagement_Backend.IRepository;
 using EventManagement_Backend.Models;
 using EventManagement_Backend.PaymentDTOs;

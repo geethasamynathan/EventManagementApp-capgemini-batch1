@@ -34,14 +34,6 @@ namespace EventManagement_Backend.Controllers
                     return BadRequest("Payment processing failed.");
                 }
                 return Ok(result);
-                //if (result != null)
-                //{
-                //    return Ok(result);
-                //}// Return the payment directly
-                //else
-                //{
-                //    return BadRequest();
-                //}
             }
             catch (Exception e)
             {

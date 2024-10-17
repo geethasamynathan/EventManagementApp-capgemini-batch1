@@ -1,5 +1,4 @@
-﻿
-using EventManagement_Backend.Models;
+﻿using EventManagement_Backend.Models;
 
 namespace EventManagement_Frontend.Models
 {
@@ -13,6 +12,6 @@ namespace EventManagement_Frontend.Models
 
         public bool? IsAvailble { get; set; }
 
-       public virtual Event? Event { get; set; } = null!;
+        public virtual Event? Event { get; set; } = null!;
     }
 }

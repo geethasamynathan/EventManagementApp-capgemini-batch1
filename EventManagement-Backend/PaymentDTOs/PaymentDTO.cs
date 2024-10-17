@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EventManagement_Backend.DTOs
+namespace EventManagement_Backend.PaymentDTOs
 {
     public class PaymentDTO
     {

@@ -46,6 +46,7 @@ namespace Event_Management_Application_Authenication
             builder.Services.AddScoped<ICaterogryRepository, CategoryRepository>();
             builder.Services.AddScoped<ITicketRepository, TicketRepository>();
             builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+          
             builder.Services.AddHttpClient();
             
             //builder.Services.AddScoped<IReview,EventReview>();
