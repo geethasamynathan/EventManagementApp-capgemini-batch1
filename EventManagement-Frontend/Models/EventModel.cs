@@ -35,6 +35,10 @@ namespace EventManagement_Frontend.Models
         [Required(ErrorMessage = "Category Name is required")]
         [StringLength(50)]
         public string CategoryName { get; set; }
+        //[JsonPropertyName("categoryId")]
+        //[Required(ErrorMessage = "Category Name is required")]
+        //[StringLength(50)]
+        //public string CategoryId { get; set; }
         [JsonPropertyName("imageUrl")]
         [Required(ErrorMessage = "Image URL is required")]
         [StringLength(255)]

@@ -1,39 +1,35 @@
 ﻿@model List<EventModel>
+<head>
+    <link href="~/css/event.css" rel="stylesheet" />
+</head>
 
-<h2>Events</h2>
+<h2 class="header">Discover Our Events</h2>
 
 @if (Model == null || !Model.Any())
 {
-    <p>No events available at the moment.</p>
+        <p>No events available at the moment.</p>
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Event Name</th>
-                <th>Date</th>
-                <th>Location</th>
-                <th>Price</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var eventModel in Model)
-            {
-                <tr>
-                    <td>@eventModel.EventName</td>
-                    <td>@eventModel.StartDate.ToString("yyyy-MM-dd")</td>
-                    <td>@eventModel.Location</td>
-                    <td>@eventModel.Price.ToString("C")</td>
-                    <td>
-                        <a href="@Url.Action("Details", new { id = eventModel.EventId })">Details</a> |
-                        <a href="@Url.Action("EditEvent", new { id = eventModel.EventId })">Edit</a> |
-                        <a href="@Url.Action("DeleteEvent", new { id = eventModel.EventId })">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    @foreach (var eventModel in Model)
+    {
+        <br />
+        <div class="card mb-3">
+            <img src="@eventModel.ImageURL" class="card-img-top" alt="..." height="400" width="400">
+            <div class="card-body" style="background:rgb(241, 221, 237)">
+                <h5 class="card-title" style="text-align:center;text-align:center">@eventModel.EventName</h5>
+                <p class="card-text">@eventModel.Description</p>
+                <p style="text-align:center">EVENT DATES FROM : @eventModel.StartDate TO : @eventModel.EndDate</p>
+                <p style="text-align:center">TICKET PRICE : ₹  @eventModel.Price</p>
+                <p class="card-text" style="text-align:center"><small class="text-body-secondary">LOCATION : @eventModel.Location</small></p>
+                <button class="rating" style="background:green;display:block;margin:auto">RATING : ⭐⭐⭐⭐⭐ : @eventModel.Rating </button>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+    }
 }
-<a href="@Url.Action("CreateEvent","Event")" class="btn btn-primary">Create New Event</a>
+ @*  <button>
+ <a href="@Url.Action("CreateEvent", "Event")">Create New Event</a>
+ </button> *@

@@ -19,100 +19,28 @@ namespace EventManagement_Frontend.Controllers
             _httpClient = httpClient;
             _config = configuration;
         }
-        /* // GET: EventController
-         public ActionResult Index()
-         {
-             return View();
-         }
-
-         // GET: EventController/Details/5
-         public ActionResult Details(int id)
-         {
-             return View();
-         }
-
-         // GET: EventController/Create
-         public ActionResult Create()
-         {
-             return View();
-         }
-
-         // POST: EventController/Create
-         [HttpPost]
-         [ValidateAntiForgeryToken]
-         public ActionResult Create(IFormCollection collection)
-         {
-             try
-             {
-                 return RedirectToAction(nameof(Index));
-             }
-             catch
-             {
-                 return View();
-             }
-         }
-
-         // GET: EventController/Edit/5
-         public ActionResult Edit(int id)
-         {
-             return View();
-         }
-
-         // POST: EventController/Edit/5
-         [HttpPost]
-         [ValidateAntiForgeryToken]
-         public ActionResult Edit(int id, IFormCollection collection)
-         {
-             try
-             {
-                 return RedirectToAction(nameof(Index));
-             }
-             catch
-             {
-                 return View();
-             }
-         }
-
-         // GET: EventController/Delete/5
-         public ActionResult Delete(int id)
-         {
-             return View();
-         }
-
-         // POST: EventController/Delete/5
-         [HttpPost]
-         [ValidateAntiForgeryToken]
-         public ActionResult Delete(int id, IFormCollection collection)
-         {
-             try
-             {
-                 return RedirectToAction(nameof(Index));
-             }
-             catch
-             {
-                 return View();
-             }
-         }*/
         // GET: Events
         public async Task<IActionResult> Index()
         {
-            var apiUrl = _config["ApiSettings:BaseUrl"] + "/events";
-            var response = await _httpClient.GetAsync(apiUrl);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var content = await response.Content.ReadAsStringAsync();
-                var events =JsonSerializer.Deserialize<List<EventModel>>(content);
+                var apiUrl = _config["ApiSettings:BaseUrl"] + "/events";
+                var response = await _httpClient.GetAsync(apiUrl);
 
-                //foreach (var item in events ){
-                //    Console.WriteLine(item);
-                //}
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var events = JsonSerializer.Deserialize<List<EventModel>>(content);
+                    return View(events);
+                }
 
-                return View(events);
+                // Return an empty list in case of failure, to avoid NullReferenceException
+                return View(new List<EventModel>());
             }
-
-            // Return an empty list in case of failure, to avoid NullReferenceException
-            return View(new List<EventModel>());
+            catch (Exception ex)
+            {
+                return View(new List<EventModel>());
+            }
         }
 
         // GET: Events/Details/5
@@ -143,7 +71,7 @@ namespace EventManagement_Frontend.Controllers
         }
 
         // GET: Events/Create
-        public IActionResult Create()
+        public IActionResult CreateEvent()
         {
             return View();
         }

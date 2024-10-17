@@ -2,10 +2,10 @@ using EventManagement_Backend.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<EventManagementDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("")));
 
 // Add services to the container.
+builder.Services.AddDbContext<EventManagementDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("")));
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 
