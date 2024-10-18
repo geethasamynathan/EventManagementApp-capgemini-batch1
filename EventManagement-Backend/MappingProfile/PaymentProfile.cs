@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using EventManagement_Backend.DTOs;
+using EventManagement_Backend.PaymentDTOs;
 using EventManagement_Backend.Models;
 
 namespace EventManagement_Backend.MappingProfile

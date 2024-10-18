@@ -15,7 +15,7 @@ namespace EventManagement_Backend.Controllers
         {
             _ticketRepository = ticketRepository;
         }
-        [HttpPost("book")]
+        [HttpPost]
         public IActionResult BookTicket([FromBody] Ticket ticket)
         {
             if (ticket == null)

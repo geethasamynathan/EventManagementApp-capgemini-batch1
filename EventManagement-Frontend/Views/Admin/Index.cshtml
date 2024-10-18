@@ -31,27 +31,26 @@
     <!-- Admin Dashboard Content -->
     <div class="row">
         <div class="col-md-6">
-            <h4>User Management</h4>
-            <a href="@Url.Action("Index", "CategoryManagement")" class="btn btn-primary">Manage Category</a>
+            <h4>Category Management</h4>
+            <a href="@Url.Action("Index", "Category")" class="btn btn-primary">Manage Category</a>
         </div>
-        <div class="col-md-6">
+        @* <div class="col-md-6">
             <h4>User Management</h4>
-            <a href="@Url.Action("Index", "UserManagement")" class="btn btn-primary">Manage Users</a>
-        </div>
+            <a href="@Url.Action("Index", "")" class="btn btn-primary">Manage Users</a>
+        </div> *@
         <div class="col-md-6">
             <h4>Event Management</h4>
-            <a href="@Url.Action("Index", "EventManagement")" class="btn btn-primary">Manage Events</a>
+            <a href="@Url.Action("Index", "Event")" class="btn btn-primary">Manage Events</a>
         </div>
     </div>
-
     <div class="row mt-4">
-        <div class="col-md-6">
+       @*  <div class="col-md-6">
             <h4>Payment Management</h4>
             <a href="@Url.Action("Index", "PaymentManagement")" class="btn btn-primary">Manage Payments</a>
-        </div>
+        </div> *@
         <div class="col-md-6">
             <h4>Review Management</h4>
-            <a href="@Url.Action("Index", "ReviewsManagement")" class="btn btn-primary">Manage Reviews</a>
+            <a href="@Url.Action("Index", "Review")" class="btn btn-primary">Manage Reviews</a>
         </div>
     </div>
 </div>

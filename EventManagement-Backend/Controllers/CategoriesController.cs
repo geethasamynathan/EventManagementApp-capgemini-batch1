@@ -30,7 +30,7 @@ namespace EventManagement_Backend.Controllers
         // GET: api/category/{id}
         
         [HttpGet("{id}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult GetCategory(int id)
         {
             var category = _categoryService.GetCategoryById(id);
@@ -43,7 +43,7 @@ namespace EventManagement_Backend.Controllers
 
         // POST: api/category
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult AddCategory([FromBody] Category category)
         {
             if (!ModelState.IsValid)
@@ -55,7 +55,7 @@ namespace EventManagement_Backend.Controllers
         }
 
         // PUT: api/category/{id}
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public IActionResult UpdateCategory(int id, [FromBody] Category category)
         {
@@ -76,7 +76,7 @@ namespace EventManagement_Backend.Controllers
             return Ok("Category updated successfully");
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         // DELETE: api/category/{id}
         [HttpDelete("{id}")]
         public IActionResult DeleteCategory(int id)

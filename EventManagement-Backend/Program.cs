@@ -4,6 +4,7 @@ using EventManagement_Backend.IRepository;
 using EventManagement_Backend.MappingProfile;
 using EventManagement_Backend.Models;
 using EventManagement_Backend.Repository;
+using EventManagement_Backend.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,8 @@ namespace Event_Management_Application_Authenication
 
             builder.Services.AddAutoMapper(typeof(PaymentProfile));
             builder.Services.AddLogging();
+            builder.Services.AddAutoMapper(typeof(BookingProfile));
+            builder.Services.AddLogging();
             // Add services to the container.
 
             //builder.Services.AddControllers();
@@ -29,11 +32,7 @@ namespace Event_Management_Application_Authenication
              {
             options.JsonSerializerOptions.AllowTrailingCommas = true;
              });
-
-
             builder.Services.AddControllers();
-            
-
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddHttpClient();
             builder.Services.AddEndpointsApiExplorer();
@@ -46,6 +45,8 @@ namespace Event_Management_Application_Authenication
             builder.Services.AddScoped<ICaterogryRepository, CategoryRepository>();
             builder.Services.AddScoped<ITicketRepository, TicketRepository>();
             builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+            builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+            builder.Services.AddScoped<IBookingService, BookingService>();
             builder.Services.AddHttpClient();
             
             //builder.Services.AddScoped<IReview,EventReview>();

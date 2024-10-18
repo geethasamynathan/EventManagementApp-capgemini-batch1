@@ -1,11 +1,11 @@
 ﻿using EventManagement_Backend.IRepository;
-using EventManagement_Backend.PaymentDTOs;
 using EventManagement_Backend.Models;
 using EventManagement_Backend.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using static System.Reflection.Metadata.BlobBuilder;
+using EventManagement_Backend.PaymentDTOs;
 
 namespace EventManagement_Backend.Controllers
 {
@@ -34,14 +34,6 @@ namespace EventManagement_Backend.Controllers
                     return BadRequest("Payment processing failed.");
                 }
                 return Ok(result);
-                //if (result != null)
-                //{
-                //    return Ok(result);
-                //}// Return the payment directly
-                //else
-                //{
-                //    return BadRequest();
-                //}
             }
             catch (Exception e)
             {
@@ -49,5 +41,26 @@ namespace EventManagement_Backend.Controllers
                 return BadRequest(new { Message = e.Message, Exception = e.InnerException?.Message });
             }
         }
+
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAllPayments()
+        {
+            try
+            {
+                var payments = _paymentRepository.GetAllPayments();
+                if (payments == null || !payments.Any())
+                {
+                    return NotFound("No payments found.");
+                }
+
+                return Ok(payments);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error retrieving payments");
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "An error occurred while retrieving payments." });
+            }
+        }
     }
 }
+

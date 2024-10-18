@@ -98,7 +98,7 @@ namespace EventManagement_Frontend.Controllers
         {
             var apiUrl = _config["ApiSettings:BaseUrl"] + "/events";
             var response = await _httpClient.GetAsync(apiUrl);
-
+            TempData.Keep();
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();

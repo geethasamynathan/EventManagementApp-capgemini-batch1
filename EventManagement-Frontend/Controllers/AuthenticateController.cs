@@ -1,5 +1,6 @@
 ﻿using EventManagement_Frontend.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing.Template;
 using Newtonsoft.Json;
 using System.Text;
 
@@ -40,10 +41,30 @@ namespace EventManagement_Frontend.Controllers
                         var responseString = await response.Content.ReadAsStringAsync();
                         var tokenResponse = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseString);
                         var token = tokenResponse["token"];
+                    var userid=tokenResponse["userid"];
+                    var username=tokenResponse["username"];
                         TempData["Token"] = token;
                         TempData["SuccessMessage"] = "Login success!";
-                        return RedirectToAction("Index");
-                    }
+                    TempData["userid"] = userid;
+
+                    // Store user information in session
+                    HttpContext.Session.SetString("UserName", login.Username);
+                    HttpContext.Session.SetString("UserId", userid);
+                    string str = JsonConvert.SerializeObject(new ModelMaza {
+                     UserId = userid
+                    
+                    });
+                    HttpContext.Session.SetString("str", str);
+
+                    Console.WriteLine(HttpContext.Session.GetString("UserId"));
+                    //var user = LoginModel(login);
+                    //if (user != null)
+                    //{
+                        // Pass username to the view model
+                        var userName = new LoginModel { Username = login.Username };
+                        return RedirectToAction("HomePage", "Home", userName);
+                    //}
+                }
                     else
                     {
                         TempData["ErrorMessage"] = "Login Failed";
@@ -60,6 +81,16 @@ namespace EventManagement_Frontend.Controllers
                     }
                 }
             }
+
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            // Clear the session data
+            HttpContext.Session.Clear();
+            TempData["LogoutMessage"] = "Logout successfully.";
+            return RedirectToAction("EvenAppPage", "Home");
+        }
+
 
         [HttpGet]
         public IActionResult Registration()
@@ -89,7 +120,7 @@ namespace EventManagement_Frontend.Controllers
                 {
                     TempData["SuccessMessage"] = "User Added Successfully";
                     // Redirect to the Login page after successful registration
-                    return RedirectToAction("Login", "Authenticate");
+                    return RedirectToAction("HomePage", "Home");
                 }
                 else
                 {

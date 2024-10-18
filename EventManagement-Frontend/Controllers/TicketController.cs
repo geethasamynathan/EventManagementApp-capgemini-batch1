@@ -1,4 +1,6 @@
-﻿using EventManagement_Frontend.Models;
+﻿
+using EventManagement_Frontend.IService;
+using EventManagement_Frontend.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -7,33 +9,42 @@ namespace EventManagement_Frontend.Controllers
 {
     public class TicketController : Controller
     {
-        public IActionResult Create()
+        private readonly ITicketService _ticketService;
+        public TicketController(ITicketService ticketRepository)
         {
-            var availableSeats = GetAvailableSeats();
-            ViewBag.AvailableSeats = availableSeats; // Pass available seats to the view
-            return View(new TicketModel()); // Pass an empty model to the view
+            _ticketService = ticketRepository;
+        }
+        [HttpGet]
+        public IActionResult Create(int maxSeats, string seatIds)
+        {
+            TempData.Keep();
+            //return View(new TicketModel() { NumberOfTickets= maxSeats, SeatId=Convert.ToIn    t32(seatIds)}); 
+            TicketModel ticket = new TicketModel() { NumberOfTickets=maxSeats,SeatId = Convert.ToInt32(seatIds) };
+            return View(ticket);
         }
 
         // POST: Ticket/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(TicketModel model)
+        public async Task<IActionResult> Create(TicketModel model)
         {
+            TempData.Keep();
             if (ModelState.IsValid)
             {
-                // For now, let's just simulate a booking ID and total amount calculation
-                model.BookingID = new System.Random().Next(1, 1000); // Simulating a booking ID
-                model.TotalAmount = model.NumberOfTickets * 100; // Assuming a ticket price of $20
 
+                model.BookingID = new System.Random().Next(1, 1000);
+                model.TotalAmount = model.NumberOfTickets * 100;
+                TempData["amount"] = model.TotalAmount;
+                HttpContext.Session.SetString("amount",model.TotalAmount.ToString());
+                //TicketModel newModel = await _ticketService.AddTicket(model);
                 // Store model data in TempData
                 TempData["BookingData"] = JsonConvert.SerializeObject(model);
 
                 // Redirect to the confirmation page
-                return RedirectToAction("Confirmation");
+                //return RedirectToAction("Con")
+                return RedirectToAction("Index","UserPayment");
             }
-
-            // If we got this far, something failed; redisplay the form
-            ViewBag.AvailableSeats = GetAvailableSeats(); // Replace with actual seat retrieval logic
+            //ViewBag.AvailableSeats = GetAvailableSeats(); 
             return View(model);
         }
 
@@ -41,14 +52,15 @@ namespace EventManagement_Frontend.Controllers
         {
             // Retrieve model data from TempData
             var modelData = TempData["BookingData"] as string;
-
+            TempData.Keep();
             if (!string.IsNullOrEmpty(modelData))
             {
                 var model = JsonConvert.DeserializeObject<TicketModel>(modelData);
+                return RedirectToAction("Index", "UserPayment");
                 return View(model); // Pass the model to the view
             }
 
-            return RedirectToAction("Create"); // Redirect to create if no data is found
+            return RedirectToAction("Index","PayementResults");
         }
 
         private List<int> GetAvailableSeats()

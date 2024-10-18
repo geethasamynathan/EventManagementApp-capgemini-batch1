@@ -28,5 +28,15 @@ namespace EventManagement_Frontend.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        public IActionResult EventAppPage()
+        {
+            return View();
+        }
+
+        public IActionResult HomePage(LoginModel model)
+        {
+            TempData.Keep();
+            return View(model);
+        }
     }
 }

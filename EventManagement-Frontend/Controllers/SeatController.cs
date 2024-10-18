@@ -17,6 +17,7 @@ namespace EventManagement_Frontend.Controllers
         
         public IActionResult Index(int eventId = 3)
         {
+            TempData.Keep();
             var seats = _context.Seats
                 .Where(s => s.EventId == eventId)
                 .Select(seat => new SeatModel
@@ -74,7 +75,7 @@ namespace EventManagement_Frontend.Controllers
             _context.SaveChanges();
 
             // Return success response
-            return Json(new { success = true, message = "Seats booked successfully." });
+            return Json(new { success = true, message = "Seats Selection success ." });
         }
 
     }

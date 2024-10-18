@@ -3,7 +3,16 @@
 @{
     ViewData["Title"] = "Login";
 }
-
+<style>
+    body {
+        padding-top: 56px;
+        background-color: #343a40;
+        background-image: url('@Url.Content("~/images/music.jpg")');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+</style>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -13,7 +22,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form asp-action="Login" method="post">
+                    <form asp-controller="Home" asp-action="HomePage" method="post">
                         <div class="form-group">
                             <label asp-for="Username"></label>
                             <input asp-for="Username" class="form-control" />
